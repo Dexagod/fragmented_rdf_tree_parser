@@ -1,21 +1,21 @@
-# fragmented_rdf_tree_parser
+# ldtree-parser
 
 ## what
 
-Simple parsing tool for fragmented rdf tree.
+Simple parsing tool for (fragmented) linked data tree.
 Parses trees saved in different fragments/files in rdf data-format based on the Tree ontology by P.Colpaert found at https://github.com/pietercolpaert/TreeOntology.
 
 
 ## installation
 Installation is done through npm:
 ```
-npm install simple_rdf_tree_parser.
+npm install ldtree-parser.
 ```
 
 
 ## usage
 ``` javascript
-let tree_parser = require('simple_rdf_tree_parser')
+let tree_parser = require('ldtree-parser')
 let parsed_tree = tree_parser.parse_tree(url, options).then((data) => console.log(data))
 ```
 
