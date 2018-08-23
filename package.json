@@ -1,0 +1,30 @@
+{
+  "name": "simple_rdf_tree_parser",
+  "version": "1.0.0",
+  "description": "Simple parsing tool that returns the nodes found in an rdf tree fragment (according to the TreeOntology) spec",
+  "main": "lib/simple_tree_parser.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dexagod/fragmented_rdf_tree_parser.git"
+  },
+  "keywords": [
+    "rdf",
+    "TreeOntology",
+    "parser"
+  ],
+  "author": "Dexagod <dedecker.ruben@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Dexagod/fragmented_rdf_tree_parser/issues"
+  },
+  "homepage": "https://github.com/Dexagod/fragmented_rdf_tree_parser#readme",
+  "dependencies": {
+    "ldfetch": "^1.0.9-alpha"
+  }
+}
