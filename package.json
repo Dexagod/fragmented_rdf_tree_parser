@@ -1,8 +1,8 @@
 {
   "name": "simple_rdf_tree_parser",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Simple parsing tool that returns the nodes found in an rdf tree fragment (according to the TreeOntology) spec",
-  "main": "lib/simple_tree_parser.js",
+  "main": "index.js",
   "directories": {
     "lib": "lib"
   },
