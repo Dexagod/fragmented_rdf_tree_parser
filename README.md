@@ -1,15 +1,44 @@
-# fragmented_rdf_tree_parser
-Simple parsing for fragmented rdf tree given uri.
+# ldtree-parser
 
-exports parse_tree(uri, options);
+## what
 
-options parameter has three collections:
-- aliases (dictionary)
-- removable_prefixes (set of uri's)
-- single_predicates (set of uri's)
+Simple parsing tool for (fragmented) linked data tree.
+Parses trees saved in different fragments/files in rdf data-format based on the Tree ontology by P.Colpaert found at https://github.com/pietercolpaert/TreeOntology.
 
-First single_predicates that match an rdf-predicate will save their argument as a value instead of a list.
 
-Afterwards aliases will rename aall given dictionary keys for their respective values.
+## installation
+Installation is done through npm:
+```
+npm install ldtree-parser.
+```
 
-Lastly the removeable prefixes will be stripped from the received predicates. (not from the identifyers as that could complicate things after parsing.
+
+## usage
+``` javascript
+let tree_parser = require('ldtree-parser')
+let parsed_tree = tree_parser.parse_tree(url, options).then((data) => console.log(data))
+```
+
+## parameters
+
+ - url: url from where the file needs to be loaded
+ - options:
+      -> single predicates: The objects of these predicates are stored as a value and not as a list.
+      -> aliases: These predicates are changed to the given alias in the returned objects.
+      -> removable prefixes: These predicate prefixes are removed for readability and later processing.
+
+``` javascript
+var options = {};
+options["aliases"] = {};
+options["removable_prefixes"] = new Set();
+options["single_predicates"] = new Set();
+
+options["aliases"]["http://www.w3.org/1999/02/22-rdf-syntax-ns#type"] = "type";
+options["removable_prefixes"].add("http://www.w3.org/ns/hydra/core#");
+options["single_predicates"].add("http://www.w3.org/ns/hydra/core#value");
+options["single_predicates"].add("http://www.w3.org/1999/02/22-rdf-syntax-ns#type");
+```
+The order of execution is:
+First the predicate is checked on being a single predicate.
+Then the predicate is checked on having an alias.
+Lastly the prefixes are removed from the predicates where possible.
