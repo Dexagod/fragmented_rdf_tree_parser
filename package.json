@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/Dexagod/fragmented_rdf_tree_parser#readme",
   "dependencies": {
-    "ldfetch": "^1.0.9-alpha"
+    "ldfetch": "^1.0.9-alpha",
+    "lru-cache": "^4.1.3"
   }
 }
