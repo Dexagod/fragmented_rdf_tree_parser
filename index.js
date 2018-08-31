@@ -12,6 +12,7 @@ module.exports.parseTree = function(url, singles = new Set()) {
 
 function parse(triples, singles) {
     let nodes = {};
+    let collections = {};
     let unidentified = {};
     let listItems = {};
 
@@ -39,20 +40,33 @@ function parse(triples, singles) {
                 nodes[subject] = Object.assign(nodes[subject], toAdd);
                 delete unidentified[subject];
             }
+        } else if (predicate === "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" && object === "http://www.w3.org/ns/hydra/core#Collection") {
+            addTriple(collections, subject, predicate, object, singles.has(predicate));
+
+            // Copy unidentified data to node
+            let toAdd = unidentified[subject];
+            if (toAdd !== undefined) {
+                collections[subject] = Object.assign(collections[subject], toAdd);
+                delete unidentified[subject];
+            }
         } else if (subject.slice(0, 2) === "_:") {
             addTriple(listItems, subject, predicate, object, singles.has(predicate));
         } else {
             if (nodes.hasOwnProperty(subject)) {
                 addTriple(nodes, subject, predicate, object, singles.has(predicate));
-            } else {
+            } else if (collections.hasOwnProperty(subject)) {
+                addTriple(collections, subject, predicate, object, singles.has(predicate));
+            } else{
                 addTriple(unidentified, subject, predicate, object, singles.has(predicate));
             }
         }
     });
 
     removeEmptyNodes(nodes);
-
-    return nodes;
+    return {
+        nodes: nodes,
+        collections: collections
+    };
 }
 
 function addTriple(obj, subject, predicate, object, single) {
